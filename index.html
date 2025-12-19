@@ -1,583 +1,561 @@
 <!doctype html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Elements - Component Library</title>
-        <link
-            href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@300;400;500;600&display=swap"
-            rel="stylesheet"
-        />
-        <script type="module" src="/lib.js"></script>
-        <style>
-            :root {
-                /* Colors */
-                --bg-base: oklab(0.15 0 0);
-                --bg-elevated: oklab(0.22 0 0);
-                --bg-subtle: oklab(0.25 0 0);
-                --border: oklab(0.3 0 0);
-                --text-primary: oklab(0.98 0 0);
-                --text-secondary: oklab(0.87 0 0);
-                --text-muted: oklab(0.72 0 0);
-                --text-dim: oklab(0.55 0 0);
-                --text-hover: oklab(0.92 0 0);
-
-                /* Accent colors */
-                --accent-red: oklab(0.7 0.16 0.13);
-                --accent-orange: oklab(0.68 0.18 0.15);
-                --accent-cyan: oklab(0.78 -0.1 -0.06);
-                --accent-cyan-hover: oklab(0.84 -0.08 -0.04);
-                --accent-blue: oklab(0.6 -0.04 -0.12);
-                --accent-green: oklab(0.73 -0.19 0.14);
-
-                /* Fonts */
-                --font-body:
-                    "Barlow", -apple-system, BlinkMacSystemFont, sans-serif;
-                --font-display: "Bebas Neue", Impact, sans-serif;
-
-                /* Font weights */
-                --font-light: 300;
-                --font-normal: 400;
-                --font-medium: 500;
-                --font-semibold: 600;
-
-                /* Font sizes */
-                --text-xs: 0.8125rem;
-                --text-sm: 0.9375rem;
-                --text-base: 1rem;
-                --text-lg: 1.125rem;
-                --text-xl: 1.375rem;
-                --text-2xl: 1.75rem;
-                --text-3xl: 2rem;
-                --text-4xl: 3.5rem;
-
-                /* Radii */
-                --radius-sm: 4px;
-                --radius-md: 8px;
-                --radius-lg: 12px;
-                --radius-xl: 16px;
-
-                /* Spacing */
-                --space-1: 0.25rem;
-                --space-2: 0.5rem;
-                --space-3: 0.75rem;
-                --space-4: 1rem;
-                --space-5: 1.25rem;
-                --space-6: 1.5rem;
-                --space-8: 2rem;
-                --space-10: 2.5rem;
-                --space-12: 3rem;
-
-                --sidebar-width: 240px;
-            }
-
-            * {
-                box-sizing: border-box;
-                margin: 0;
-                padding: 0;
-            }
-
-            html,
-            body {
-                height: 100%;
-                overflow: hidden;
-            }
-
-            body {
-                font-family: var(--font-body);
-                font-size: var(--text-base);
-                font-weight: var(--font-normal);
-                line-height: 1.7;
-                color: var(--text-secondary);
-                background: var(--bg-base);
-            }
-
-            .layout {
-                display: flex;
-                height: 100vh;
-                overflow: hidden;
-            }
-
-            /* Sidebar */
-            .sidebar {
-                width: var(--sidebar-width);
-                padding: var(--space-5) var(--space-3);
-                background: var(--bg-base);
-                overflow-y: auto;
-                flex-shrink: 0;
-            }
-
-            .sidebar-brand {
-                display: flex;
-                align-items: center;
-                gap: var(--space-3);
-                padding: var(--space-1) var(--space-3);
-                margin-bottom: var(--space-6);
-            }
-
-            .sidebar-logo {
-                width: 32px;
-                height: 32px;
-                flex-shrink: 0;
-            }
-
-            .sidebar-title {
-                font-family: var(--font-display);
-                font-size: var(--text-xl);
-                font-weight: var(--font-normal);
-                letter-spacing: 0.04em;
-                text-transform: uppercase;
-                color: var(--text-primary);
-            }
-
-            .sidebar-standalone {
-                margin-bottom: var(--space-4);
-                padding-bottom: var(--space-4);
-                border-bottom: 1px solid var(--border);
-            }
-
-            .sidebar-group {
-                margin-bottom: var(--space-4);
-            }
-
-            .sidebar-group-label {
-                font-size: var(--text-xs);
-                font-weight: var(--font-semibold);
-                color: var(--text-muted);
-                text-transform: uppercase;
-                letter-spacing: 0.05em;
-                padding: var(--space-2) var(--space-3);
-                margin-bottom: var(--space-1);
-            }
-
-            .sidebar nav a {
-                display: block;
-                padding: var(--space-1) var(--space-3);
-                color: var(--text-dim);
-                text-decoration: none;
-                border-radius: var(--radius-md);
-                font-size: var(--text-sm);
-                font-weight: var(--font-medium);
-                transition: color 0.15s ease;
-            }
-
-            .sidebar nav a:hover {
-                color: var(--text-hover);
-            }
-
-            .sidebar nav a.active {
-                color: var(--text-primary);
-                text-decoration: underline;
-                text-decoration-color: var(--accent-cyan);
-                text-decoration-thickness: 3px;
-                text-underline-offset: 4px;
-            }
-
-            /* Main content */
-            main {
-                flex: 1;
-                margin: var(--space-3);
-                margin-left: 0;
-                padding: var(--space-10) var(--space-12);
-                background: var(--bg-elevated);
-                border: 1px solid var(--border);
-                border-radius: var(--radius-xl);
-                overflow-y: auto;
-            }
-
-            .content-inner {
-                max-width: 800px;
-            }
-
-            h1 {
-                font-family: var(--font-display);
-                font-size: var(--text-4xl);
-                font-weight: var(--font-normal);
-                letter-spacing: 0.05em;
-                line-height: 1;
-                color: var(--text-primary);
-                text-transform: uppercase;
-                margin-bottom: var(--space-3);
-            }
-
-            .description {
-                font-size: var(--text-lg);
-                color: var(--text-muted);
-                margin-bottom: var(--space-8);
-            }
-
-            /* Sections */
-            section {
-                background: var(--bg-subtle);
-                border-radius: var(--radius-lg);
-                border: 1px solid var(--border);
-                margin-bottom: var(--space-6);
-            }
-
-            section header {
-                padding: var(--space-3) var(--space-5);
-                border-bottom: 1px solid var(--border);
-                font-weight: var(--font-semibold);
-                font-size: var(--text-sm);
-                color: var(--text-primary);
-                text-transform: uppercase;
-                letter-spacing: 0.04em;
-            }
-
-            section .section-content {
-                padding: var(--space-5);
-            }
-
-            /* Playground */
-            .playground {
-                display: grid;
-                grid-template-columns: 1fr 200px;
-                gap: var(--space-6);
-            }
-
-            .preview {
-                padding: var(--space-8);
-                background: var(--bg-base);
-                border-radius: var(--radius-md);
-                border: 1px solid var(--border);
-            }
-
-            .controls label {
-                display: block;
-                font-size: var(--text-xs);
-                color: var(--text-muted);
-                margin-bottom: var(--space-1);
-                text-transform: uppercase;
-                letter-spacing: 0.04em;
-            }
-
-            .controls input[type="text"],
-            .controls input[type="number"] {
-                width: 100%;
-                padding: var(--space-2) var(--space-3);
-                background: var(--bg-base);
-                border: 1px solid var(--border);
-                border-radius: var(--radius-md);
-                color: var(--text-primary);
-                font-family: var(--font-body);
-                font-size: var(--text-sm);
-                margin-bottom: var(--space-3);
-                outline: none;
-                transition: border-color 0.15s ease;
-            }
-
-            .controls input:focus {
-                border-color: var(--text-muted);
-            }
-
-            .controls .checkbox {
-                display: flex;
-                align-items: center;
-                gap: var(--space-2);
-                margin-bottom: var(--space-2);
-                font-size: var(--text-sm);
-                color: var(--text-secondary);
-            }
-
-            .controls .checkbox input {
-                width: auto;
-                accent-color: var(--accent-cyan);
-            }
-
-            /* Code block */
-            pre {
-                background: var(--bg-base);
-                padding: var(--space-4) var(--space-5);
-                border-radius: var(--radius-md);
-                border: 1px solid var(--border);
-                font-size: var(--text-sm);
-                overflow-x: auto;
-                line-height: 1.6;
-                margin-top: var(--space-4);
-            }
-
-            .tag {
-                color: var(--accent-cyan);
-            }
-            .attr {
-                color: var(--accent-orange);
-            }
-            .str {
-                color: var(--accent-green);
-            }
-            .kw {
-                color: var(--accent-red);
-                font-weight: var(--font-medium);
-            }
-            .fn {
-                color: var(--accent-cyan);
-            }
-            .cmt {
-                color: var(--text-dim);
-                font-style: italic;
-            }
-
-            /* Props table */
-            table {
-                width: 100%;
-                border-collapse: collapse;
-                font-size: var(--text-sm);
-            }
-
-            th,
-            td {
-                text-align: left;
-                padding: var(--space-3) var(--space-4);
-                border-bottom: 1px solid var(--border);
-            }
-
-            th {
-                font-weight: var(--font-semibold);
-                color: var(--text-muted);
-                font-size: var(--text-xs);
-                text-transform: uppercase;
-                letter-spacing: 0.04em;
-                background: var(--bg-base);
-            }
-
-            td code {
-                background: var(--border);
-                padding: 0.15em 0.4em;
-                border-radius: var(--radius-sm);
-                font-size: var(--text-xs);
-                color: var(--accent-cyan);
-            }
-
-            .type {
-                color: var(--accent-cyan);
-            }
-            .default {
-                color: var(--text-dim);
-            }
-
-            /* Output */
-            .output {
-                margin-top: var(--space-4);
-                padding: var(--space-4);
-                background: var(--bg-base);
-                border: 1px solid var(--border);
-                border-radius: var(--radius-md);
-                font-family: monospace;
-                font-size: var(--text-xs);
-                color: var(--text-secondary);
-                white-space: pre-wrap;
-                max-height: 200px;
-                overflow: auto;
-            }
-
-            /* Stories */
-            .stories {
-                display: flex;
-                flex-direction: column;
-                gap: var(--space-6);
-            }
-
-            h4 {
-                font-family: var(--font-body);
-                font-size: var(--text-base);
-                font-weight: var(--font-semibold);
-                margin: var(--space-6) 0 var(--space-3);
-                color: var(--text-primary);
-            }
-
-            h4:first-child {
-                margin-top: 0;
-            }
-
-            .section-content p {
-                margin-bottom: var(--space-4);
-            }
-
-            .section-content a {
-                color: var(--accent-cyan);
-                text-decoration: underline;
-                text-underline-offset: 2px;
-            }
-
-            .section-content a:hover {
-                color: var(--accent-cyan-hover);
-            }
-
-            .story h4 {
-                margin-top: 0;
-            }
-
-            .story-preview {
-                padding: var(--space-6);
-                background: var(--bg-base);
-                border-radius: var(--radius-md);
-                border: 1px solid var(--border);
-                margin-bottom: var(--space-3);
-            }
-
-            form.demo-form {
-                display: flex;
-                gap: var(--space-3);
-            }
-
-            form.demo-form button {
-                padding: var(--space-2) var(--space-4);
-                background: var(--accent-cyan);
-                color: var(--bg-base);
-                border: none;
-                border-radius: var(--radius-md);
-                cursor: pointer;
-                font-family: var(--font-body);
-                font-size: var(--text-sm);
-                font-weight: var(--font-semibold);
-                transition: background 0.15s ease;
-            }
-
-            form.demo-form button:hover {
-                background: var(--accent-cyan-hover);
-            }
-
-            /* Custom styling for qs-actor-autocomplete in dark mode */
-            qs-actor-autocomplete {
-                --qs-input-bg: var(--bg-base);
-                --qs-input-border: var(--border);
-                --qs-input-border-focus: var(--accent-cyan);
-                --qs-input-text: var(--text-primary);
-                --qs-input-placeholder: var(--text-dim);
-                --qs-menu-bg: var(--bg-elevated);
-                --qs-menu-border: var(--border);
-                --qs-menu-shadow: rgba(0, 0, 0, 0.4);
-                --qs-item-hover: var(--bg-subtle);
-                --qs-avatar-bg: var(--border);
-                --qs-handle-color: var(--text-primary);
-                --qs-name-color: var(--text-muted);
-                --qs-radius: var(--radius-md);
-            }
-
-            /* Responsive */
-            @media (max-width: 900px) {
-                .playground {
-                    grid-template-columns: 1fr;
-                }
-            }
-
-            @media (max-width: 768px) {
-                .layout {
-                    flex-direction: column;
-                }
-
-                .sidebar {
-                    width: 100%;
-                    padding: var(--space-4);
-                    border-bottom: 1px solid var(--border);
-                }
-
-                main {
-                    margin: 0;
-                    border-radius: 0;
-                    border: none;
-                    padding: var(--space-6) var(--space-4);
-                }
-
-                h1 {
-                    font-size: var(--text-3xl);
-                }
-            }
-        </style>
-    </head>
-    <body>
-        <div class="layout">
-            <aside class="sidebar">
-                <div class="sidebar-brand">
-                    <svg
-                        class="sidebar-logo"
-                        viewBox="0 0 128 128"
-                        xmlns="http://www.w3.org/2000/svg"
-                    >
-                        <g transform="translate(64, 64)">
-                            <ellipse
-                                cx="0"
-                                cy="-28"
-                                rx="50"
-                                ry="20"
-                                fill="#FF5722"
-                            />
-                            <ellipse
-                                cx="0"
-                                cy="0"
-                                rx="60"
-                                ry="20"
-                                fill="#00ACC1"
-                            />
-                            <ellipse
-                                cx="0"
-                                cy="28"
-                                rx="40"
-                                ry="20"
-                                fill="#32CD32"
-                            />
-                        </g>
-                    </svg>
-                    <span class="sidebar-title">Elements</span>
-                </div>
-                <nav>
-                    <div class="sidebar-standalone">
-                        <a href="#getting-started">Getting Started</a>
-                    </div>
-                    <div class="sidebar-group">
-                        <div class="sidebar-group-label">Components</div>
-                        <a href="#qs-actor-autocomplete"
-                            >qs-actor-autocomplete</a
-                        >
-                    </div>
-                </nav>
-            </aside>
-
-            <main>
-                <!-- Getting Started Page -->
-                <div class="page" id="page-getting-started">
-                    <div class="content-inner">
-                        <h1>Getting Started</h1>
-                        <p class="description">
-                            Quickslice Elements — Web components for the AT
-                            Protocol.
-                        </p>
-
-                        <section>
-                            <header>Installation</header>
-                            <div class="section-content">
-                                <h4>CDN</h4>
-                                <pre><span class="tag">&lt;script</span> <span class="attr">src</span>=<span class="str">"https://unpkg.com/@quickslice/elements"</span><span class="tag">&gt;&lt;/script&gt;</span></pre>
-
-                                <h4>npm</h4>
-                                <pre>npm install @quickslice/elements</pre>
-                            </div>
-                        </section>
-
-                        <section>
-                            <header>Quick Start</header>
-                            <div class="section-content">
-                                <p>Add the script and use the components:</p>
-                                <pre><span class="tag">&lt;script</span> <span class="attr">src</span>=<span class="str">"https://unpkg.com/@quickslice/elements"</span><span class="tag">&gt;&lt;/script&gt;</span>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Elements - Component Library</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <script type="module" src="/lib.js"></script>
+    <style>
+      :root {
+        /* Colors */
+        --bg-base: oklab(0.15 0 0);
+        --bg-elevated: oklab(0.22 0 0);
+        --bg-subtle: oklab(0.25 0 0);
+        --border: oklab(0.3 0 0);
+        --text-primary: oklab(0.98 0 0);
+        --text-secondary: oklab(0.87 0 0);
+        --text-muted: oklab(0.72 0 0);
+        --text-dim: oklab(0.55 0 0);
+        --text-hover: oklab(0.92 0 0);
+
+        /* Accent colors */
+        --accent-red: oklab(0.7 0.16 0.13);
+        --accent-orange: oklab(0.68 0.18 0.15);
+        --accent-cyan: oklab(0.78 -0.1 -0.06);
+        --accent-cyan-hover: oklab(0.84 -0.08 -0.04);
+        --accent-blue: oklab(0.6 -0.04 -0.12);
+        --accent-green: oklab(0.73 -0.19 0.14);
+
+        /* Fonts */
+        --font-body: "Barlow", -apple-system, BlinkMacSystemFont, sans-serif;
+        --font-display: "Bebas Neue", Impact, sans-serif;
+
+        /* Font weights */
+        --font-light: 300;
+        --font-normal: 400;
+        --font-medium: 500;
+        --font-semibold: 600;
+
+        /* Font sizes */
+        --text-xs: 0.8125rem;
+        --text-sm: 0.9375rem;
+        --text-base: 1rem;
+        --text-lg: 1.125rem;
+        --text-xl: 1.375rem;
+        --text-2xl: 1.75rem;
+        --text-3xl: 2rem;
+        --text-4xl: 3.5rem;
+
+        /* Radii */
+        --radius-sm: 4px;
+        --radius-md: 8px;
+        --radius-lg: 12px;
+        --radius-xl: 16px;
+
+        /* Spacing */
+        --space-1: 0.25rem;
+        --space-2: 0.5rem;
+        --space-3: 0.75rem;
+        --space-4: 1rem;
+        --space-5: 1.25rem;
+        --space-6: 1.5rem;
+        --space-8: 2rem;
+        --space-10: 2.5rem;
+        --space-12: 3rem;
+
+        --sidebar-width: 240px;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      html,
+      body {
+        height: 100%;
+        overflow: hidden;
+      }
+
+      body {
+        font-family: var(--font-body);
+        font-size: var(--text-base);
+        font-weight: var(--font-normal);
+        line-height: 1.7;
+        color: var(--text-secondary);
+        background: var(--bg-base);
+      }
+
+      .layout {
+        display: flex;
+        height: 100vh;
+        overflow: hidden;
+      }
+
+      /* Sidebar */
+      .sidebar {
+        width: var(--sidebar-width);
+        padding: var(--space-5) var(--space-3);
+        background: var(--bg-base);
+        overflow-y: auto;
+        flex-shrink: 0;
+      }
+
+      .sidebar-brand {
+        display: flex;
+        align-items: center;
+        gap: var(--space-3);
+        padding: var(--space-1) var(--space-3);
+        margin-bottom: var(--space-6);
+      }
+
+      .sidebar-logo {
+        width: 32px;
+        height: 32px;
+        flex-shrink: 0;
+      }
+
+      .sidebar-title {
+        font-family: var(--font-display);
+        font-size: var(--text-xl);
+        font-weight: var(--font-normal);
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        color: var(--text-primary);
+      }
+
+      .sidebar-standalone {
+        margin-bottom: var(--space-4);
+        padding-bottom: var(--space-4);
+        border-bottom: 1px solid var(--border);
+      }
+
+      .sidebar-group {
+        margin-bottom: var(--space-4);
+      }
+
+      .sidebar-group-label {
+        font-size: var(--text-xs);
+        font-weight: var(--font-semibold);
+        color: var(--text-muted);
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        padding: var(--space-2) var(--space-3);
+        margin-bottom: var(--space-1);
+      }
+
+      .sidebar nav a {
+        display: block;
+        padding: var(--space-1) var(--space-3);
+        color: var(--text-dim);
+        text-decoration: none;
+        border-radius: var(--radius-md);
+        font-size: var(--text-sm);
+        font-weight: var(--font-medium);
+        transition: color 0.15s ease;
+      }
+
+      .sidebar nav a:hover {
+        color: var(--text-hover);
+      }
+
+      .sidebar nav a.active {
+        color: var(--text-primary);
+        text-decoration: underline;
+        text-decoration-color: var(--accent-cyan);
+        text-decoration-thickness: 3px;
+        text-underline-offset: 4px;
+      }
+
+      /* Main content */
+      main {
+        flex: 1;
+        margin: var(--space-3);
+        margin-left: 0;
+        padding: var(--space-10) var(--space-12);
+        background: var(--bg-elevated);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-xl);
+        overflow-y: auto;
+      }
+
+      .content-inner {
+        max-width: 800px;
+      }
+
+      h1 {
+        font-family: var(--font-display);
+        font-size: var(--text-4xl);
+        font-weight: var(--font-normal);
+        letter-spacing: 0.05em;
+        line-height: 1;
+        color: var(--text-primary);
+        text-transform: uppercase;
+        margin-bottom: var(--space-3);
+      }
+
+      .description {
+        font-size: var(--text-lg);
+        color: var(--text-muted);
+        margin-bottom: var(--space-8);
+      }
+
+      /* Sections */
+      section {
+        background: var(--bg-subtle);
+        border-radius: var(--radius-lg);
+        border: 1px solid var(--border);
+        margin-bottom: var(--space-6);
+      }
+
+      section header {
+        padding: var(--space-3) var(--space-5);
+        border-bottom: 1px solid var(--border);
+        font-weight: var(--font-semibold);
+        font-size: var(--text-sm);
+        color: var(--text-primary);
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+      }
+
+      section .section-content {
+        padding: var(--space-5);
+      }
+
+      /* Playground */
+      .playground {
+        display: grid;
+        grid-template-columns: 1fr 200px;
+        gap: var(--space-6);
+      }
+
+      .preview {
+        padding: var(--space-8);
+        background: var(--bg-base);
+        border-radius: var(--radius-md);
+        border: 1px solid var(--border);
+      }
+
+      .controls label {
+        display: block;
+        font-size: var(--text-xs);
+        color: var(--text-muted);
+        margin-bottom: var(--space-1);
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+      }
+
+      .controls input[type="text"],
+      .controls input[type="number"] {
+        width: 100%;
+        padding: var(--space-2) var(--space-3);
+        background: var(--bg-base);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-md);
+        color: var(--text-primary);
+        font-family: var(--font-body);
+        font-size: var(--text-sm);
+        margin-bottom: var(--space-3);
+        outline: none;
+        transition: border-color 0.15s ease;
+      }
+
+      .controls input:focus {
+        border-color: var(--text-muted);
+      }
+
+      .controls .checkbox {
+        display: flex;
+        align-items: center;
+        gap: var(--space-2);
+        margin-bottom: var(--space-2);
+        font-size: var(--text-sm);
+        color: var(--text-secondary);
+      }
+
+      .controls .checkbox input {
+        width: auto;
+        accent-color: var(--accent-cyan);
+      }
+
+      /* Code block */
+      pre {
+        background: var(--bg-base);
+        padding: var(--space-4) var(--space-5);
+        border-radius: var(--radius-md);
+        border: 1px solid var(--border);
+        font-size: var(--text-sm);
+        overflow-x: auto;
+        line-height: 1.6;
+        margin-top: var(--space-4);
+      }
+
+      .tag {
+        color: var(--accent-cyan);
+      }
+      .attr {
+        color: var(--accent-orange);
+      }
+      .str {
+        color: var(--accent-green);
+      }
+      .kw {
+        color: var(--accent-red);
+        font-weight: var(--font-medium);
+      }
+      .fn {
+        color: var(--accent-cyan);
+      }
+      .cmt {
+        color: var(--text-dim);
+        font-style: italic;
+      }
+
+      /* Props table */
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: var(--text-sm);
+      }
+
+      th,
+      td {
+        text-align: left;
+        padding: var(--space-3) var(--space-4);
+        border-bottom: 1px solid var(--border);
+      }
+
+      th {
+        font-weight: var(--font-semibold);
+        color: var(--text-muted);
+        font-size: var(--text-xs);
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+        background: var(--bg-base);
+      }
+
+      td code {
+        background: var(--border);
+        padding: 0.15em 0.4em;
+        border-radius: var(--radius-sm);
+        font-size: var(--text-xs);
+        color: var(--accent-cyan);
+      }
+
+      .type {
+        color: var(--accent-cyan);
+      }
+      .default {
+        color: var(--text-dim);
+      }
+
+      /* Output */
+      .output {
+        margin-top: var(--space-4);
+        padding: var(--space-4);
+        background: var(--bg-base);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-md);
+        font-family: monospace;
+        font-size: var(--text-xs);
+        color: var(--text-secondary);
+        white-space: pre-wrap;
+        max-height: 200px;
+        overflow: auto;
+      }
+
+      /* Stories */
+      .stories {
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-6);
+      }
+
+      h4 {
+        font-family: var(--font-body);
+        font-size: var(--text-base);
+        font-weight: var(--font-semibold);
+        margin: var(--space-6) 0 var(--space-3);
+        color: var(--text-primary);
+      }
+
+      h4:first-child {
+        margin-top: 0;
+      }
+
+      .section-content p {
+        margin-bottom: var(--space-4);
+      }
+
+      .section-content a {
+        color: var(--accent-cyan);
+        text-decoration: underline;
+        text-underline-offset: 2px;
+      }
+
+      .section-content a:hover {
+        color: var(--accent-cyan-hover);
+      }
+
+      .story h4 {
+        margin-top: 0;
+      }
+
+      .story-preview {
+        padding: var(--space-6);
+        background: var(--bg-base);
+        border-radius: var(--radius-md);
+        border: 1px solid var(--border);
+        margin-bottom: var(--space-3);
+      }
+
+      form.demo-form {
+        display: flex;
+        gap: var(--space-3);
+      }
+
+      form.demo-form button {
+        padding: var(--space-2) var(--space-4);
+        background: var(--accent-cyan);
+        color: var(--bg-base);
+        border: none;
+        border-radius: var(--radius-md);
+        cursor: pointer;
+        font-family: var(--font-body);
+        font-size: var(--text-sm);
+        font-weight: var(--font-semibold);
+        transition: background 0.15s ease;
+      }
+
+      form.demo-form button:hover {
+        background: var(--accent-cyan-hover);
+      }
+
+      /* Custom styling for qs-actor-autocomplete in dark mode */
+      qs-actor-autocomplete {
+        --qs-input-bg: var(--bg-base);
+        --qs-input-border: var(--border);
+        --qs-input-border-focus: var(--accent-cyan);
+        --qs-input-text: var(--text-primary);
+        --qs-input-placeholder: var(--text-dim);
+        --qs-menu-bg: var(--bg-elevated);
+        --qs-menu-border: var(--border);
+        --qs-menu-shadow: rgba(0, 0, 0, 0.4);
+        --qs-item-hover: var(--bg-subtle);
+        --qs-avatar-bg: var(--border);
+        --qs-handle-color: var(--text-primary);
+        --qs-name-color: var(--text-muted);
+        --qs-radius: var(--radius-md);
+      }
+
+      /* Responsive */
+      @media (max-width: 900px) {
+        .playground {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .layout {
+          flex-direction: column;
+        }
+
+        .sidebar {
+          width: 100%;
+          padding: var(--space-4);
+          border-bottom: 1px solid var(--border);
+        }
+
+        main {
+          margin: 0;
+          border-radius: 0;
+          border: none;
+          padding: var(--space-6) var(--space-4);
+        }
+
+        h1 {
+          font-size: var(--text-3xl);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="layout">
+      <aside class="sidebar">
+        <div class="sidebar-brand">
+          <svg
+            class="sidebar-logo"
+            viewBox="0 0 128 128"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <g transform="translate(64, 64)">
+              <ellipse cx="0" cy="-28" rx="50" ry="20" fill="#FF5722" />
+              <ellipse cx="0" cy="0" rx="60" ry="20" fill="#00ACC1" />
+              <ellipse cx="0" cy="28" rx="40" ry="20" fill="#32CD32" />
+            </g>
+          </svg>
+          <span class="sidebar-title">Elements</span>
+        </div>
+        <nav>
+          <div class="sidebar-standalone">
+            <a href="#getting-started">Getting Started</a>
+          </div>
+          <div class="sidebar-group">
+            <div class="sidebar-group-label">Components</div>
+            <a href="#qs-actor-autocomplete">qs-actor-autocomplete</a>
+          </div>
+        </nav>
+      </aside>
+
+      <main>
+        <!-- Getting Started Page -->
+        <div class="page" id="page-getting-started">
+          <div class="content-inner">
+            <h1>Getting Started</h1>
+            <p class="description">
+              Quickslice Elements — Web components for the AT Protocol.
+            </p>
+
+            <section>
+              <header>Installation</header>
+              <div class="section-content">
+                <h4>CDN</h4>
+                <pre><span class="tag">&lt;script</span> <span class="attr">src</span>=<span class="str">"https://unpkg.com/@quickslice/elements"</span><span class="tag">&gt;&lt;/script&gt;</span></pre>
+
+                <h4>npm</h4>
+                <pre>npm install @quickslice/elements</pre>
+              </div>
+            </section>
+
+            <section>
+              <header>Quick Start</header>
+              <div class="section-content">
+                <p>Add the script and use the components:</p>
+                <pre><span class="tag">&lt;script</span> <span class="attr">src</span>=<span class="str">"https://unpkg.com/@quickslice/elements"</span><span class="tag">&gt;&lt;/script&gt;</span>
 
 <span class="tag">&lt;qs-actor-autocomplete</span>
   <span class="attr">placeholder</span>=<span class="str">"Enter a handle"</span>
 <span class="tag">&gt;&lt;/qs-actor-autocomplete&gt;</span></pre>
 
-                                <h4>Live Example</h4>
-                                <div class="story-preview">
-                                    <qs-actor-autocomplete
-                                        placeholder="Try typing a handle..."
-                                    ></qs-actor-autocomplete>
-                                </div>
-                            </div>
-                        </section>
+                <h4>Live Example</h4>
+                <div class="story-preview">
+                  <qs-actor-autocomplete
+                    placeholder="Try typing a handle..."
+                  ></qs-actor-autocomplete>
+                </div>
+              </div>
+            </section>
 
-                        <section>
-                            <header>Theming</header>
-                            <div class="section-content">
-                                <p>Customize with CSS custom properties:</p>
-                                <pre><span class="tag">qs-actor-autocomplete</span> {
+            <section>
+              <header>Theming</header>
+              <div class="section-content">
+                <p>Customize with CSS custom properties:</p>
+                <pre><span class="tag">qs-actor-autocomplete</span> {
   <span class="attr">--qs-input-bg</span>: <span class="str">#1a1a1a</span>;
   <span class="attr">--qs-input-border</span>: <span class="str">#333</span>;
   <span class="attr">--qs-input-border-focus</span>: <span class="str">#00ced1</span>;
@@ -586,522 +564,465 @@
   <span class="attr">--qs-handle-color</span>: <span class="str">#fff</span>;
   <span class="attr">--qs-name-color</span>: <span class="str">#888</span>;
 }</pre>
-                            </div>
-                        </section>
+              </div>
+            </section>
 
-                        <section>
-                            <header>Components</header>
-                            <div class="section-content">
-                                <p>Available components:</p>
-                                <table>
-                                    <thead>
-                                        <tr>
-                                            <th>Component</th>
-                                            <th>Description</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>
-                                                <a href="#qs-actor-autocomplete"
-                                                    ><code
-                                                        >qs-actor-autocomplete</code
-                                                    ></a
-                                                >
-                                            </td>
-                                            <td>
-                                                AT Protocol actor/handle
-                                                autocomplete input
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </section>
+            <section>
+              <header>Components</header>
+              <div class="section-content">
+                <p>Available components:</p>
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Component</th>
+                      <th>Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <a href="#qs-actor-autocomplete"
+                          ><code>qs-actor-autocomplete</code></a
+                        >
+                      </td>
+                      <td>AT Protocol actor/handle autocomplete input</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </section>
+          </div>
+        </div>
+
+        <!-- Component Page -->
+        <div class="page" id="page-qs-actor-autocomplete" hidden>
+          <div class="content-inner">
+            <h1>&lt;qs-actor-autocomplete&gt;</h1>
+            <p class="description">
+              Autocomplete input for Bluesky handles with avatar previews and
+              keyboard navigation.
+            </p>
+
+            <!-- Playground -->
+            <section>
+              <header>Playground</header>
+              <div class="section-content">
+                <div class="playground">
+                  <div>
+                    <div class="preview">
+                      <qs-actor-autocomplete
+                        id="playground"
+                      ></qs-actor-autocomplete>
                     </div>
+                    <pre id="playground-code"></pre>
+                  </div>
+                  <div class="controls">
+                    <label>Placeholder</label>
+                    <input
+                      type="text"
+                      id="ctrl-placeholder"
+                      value="you.bsky.social"
+                    />
+
+                    <label>Debounce (ms)</label>
+                    <input type="number" id="ctrl-debounce" value="200" />
+
+                    <label>Limit</label>
+                    <input type="number" id="ctrl-limit" value="5" />
+
+                    <label class="checkbox">
+                      <input type="checkbox" id="ctrl-disabled" />
+                      Disabled
+                    </label>
+
+                    <label class="checkbox">
+                      <input type="checkbox" id="ctrl-required" />
+                      Required
+                    </label>
+                  </div>
                 </div>
+              </div>
+            </section>
 
-                <!-- Component Page -->
-                <div class="page" id="page-qs-actor-autocomplete" hidden>
-                    <div class="content-inner">
-                        <h1>&lt;qs-actor-autocomplete&gt;</h1>
-                        <p class="description">
-                            Autocomplete input for Bluesky handles with avatar
-                            previews and keyboard navigation.
-                        </p>
+            <!-- Props -->
+            <section>
+              <header>Props</header>
+              <div class="section-content" style="padding: 0">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Attribute</th>
+                      <th>Type</th>
+                      <th>Default</th>
+                      <th>Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><code>placeholder</code></td>
+                      <td class="type">string</td>
+                      <td class="default">"handle.bsky.social"</td>
+                      <td>Input placeholder text</td>
+                    </tr>
+                    <tr>
+                      <td><code>debounce</code></td>
+                      <td class="type">number</td>
+                      <td class="default">200</td>
+                      <td>Debounce delay in milliseconds</td>
+                    </tr>
+                    <tr>
+                      <td><code>limit</code></td>
+                      <td class="type">number</td>
+                      <td class="default">5</td>
+                      <td>Maximum suggestions to display</td>
+                    </tr>
+                    <tr>
+                      <td><code>name</code></td>
+                      <td class="type">string</td>
+                      <td class="default">—</td>
+                      <td>Form field name</td>
+                    </tr>
+                    <tr>
+                      <td><code>value</code></td>
+                      <td class="type">string</td>
+                      <td class="default">""</td>
+                      <td>Current input value</td>
+                    </tr>
+                    <tr>
+                      <td><code>disabled</code></td>
+                      <td class="type">boolean</td>
+                      <td class="default">false</td>
+                      <td>Disable the input</td>
+                    </tr>
+                    <tr>
+                      <td><code>required</code></td>
+                      <td class="type">boolean</td>
+                      <td class="default">false</td>
+                      <td>Mark as required for form validation</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </section>
 
-                        <!-- Playground -->
-                        <section>
-                            <header>Playground</header>
-                            <div class="section-content">
-                                <div class="playground">
-                                    <div>
-                                        <div class="preview">
-                                            <qs-actor-autocomplete
-                                                id="playground"
-                                            ></qs-actor-autocomplete>
-                                        </div>
-                                        <pre id="playground-code"></pre>
-                                    </div>
-                                    <div class="controls">
-                                        <label>Placeholder</label>
-                                        <input
-                                            type="text"
-                                            id="ctrl-placeholder"
-                                            value="you.bsky.social"
-                                        />
+            <!-- Events -->
+            <section>
+              <header>Events</header>
+              <div class="section-content" style="padding: 0">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Event</th>
+                      <th>Detail</th>
+                      <th>Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><code>input</code></td>
+                      <td class="default">—</td>
+                      <td>Fires when value changes</td>
+                    </tr>
+                    <tr>
+                      <td><code>change</code></td>
+                      <td class="default">—</td>
+                      <td>Fires when a selection is made</td>
+                    </tr>
+                    <tr>
+                      <td><code>qs-select</code></td>
+                      <td class="type">{ actor }</td>
+                      <td>Fires with full actor data on selection</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </section>
 
-                                        <label>Debounce (ms)</label>
-                                        <input
-                                            type="number"
-                                            id="ctrl-debounce"
-                                            value="200"
-                                        />
+            <!-- Properties -->
+            <section>
+              <header>JavaScript Properties</header>
+              <div class="section-content" style="padding: 0">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Property</th>
+                      <th>Type</th>
+                      <th>Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><code>.value</code></td>
+                      <td class="type">string</td>
+                      <td>Get/set the current handle value</td>
+                    </tr>
+                    <tr>
+                      <td><code>.actor</code></td>
+                      <td class="type">object | null</td>
+                      <td>The full actor object from last selection</td>
+                    </tr>
+                    <tr>
+                      <td><code>.form</code></td>
+                      <td class="type">HTMLFormElement</td>
+                      <td>Reference to parent form</td>
+                    </tr>
+                    <tr>
+                      <td><code>.validity</code></td>
+                      <td class="type">ValidityState</td>
+                      <td>Form validation state</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </section>
 
-                                        <label>Limit</label>
-                                        <input
-                                            type="number"
-                                            id="ctrl-limit"
-                                            value="5"
-                                        />
+            <!-- CSS Custom Properties -->
+            <section>
+              <header>CSS Custom Properties</header>
+              <div class="section-content" style="padding: 0">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Property</th>
+                      <th>Default</th>
+                      <th>Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><code>--qs-input-bg</code></td>
+                      <td class="default">transparent</td>
+                      <td>Input background color</td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <code>--qs-input-border</code>
+                      </td>
+                      <td class="default">#ccc</td>
+                      <td>Input border color</td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <code>--qs-input-border-focus</code>
+                      </td>
+                      <td class="default">#0085ff</td>
+                      <td>Input border color on focus</td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <code>--qs-input-text</code>
+                      </td>
+                      <td class="default">inherit</td>
+                      <td>Input text color</td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <code>--qs-input-placeholder</code>
+                      </td>
+                      <td class="default">#999</td>
+                      <td>Placeholder text color</td>
+                    </tr>
+                    <tr>
+                      <td><code>--qs-menu-bg</code></td>
+                      <td class="default">#fff</td>
+                      <td>Dropdown menu background</td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <code>--qs-menu-border</code>
+                      </td>
+                      <td class="default">#ddd</td>
+                      <td>Dropdown menu border</td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <code>--qs-item-hover</code>
+                      </td>
+                      <td class="default">#f3f4f6</td>
+                      <td>Item hover/active background</td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <code>--qs-handle-color</code>
+                      </td>
+                      <td class="default">#111</td>
+                      <td>Handle text color</td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <code>--qs-name-color</code>
+                      </td>
+                      <td class="default">#666</td>
+                      <td>Display name text color</td>
+                    </tr>
+                    <tr>
+                      <td><code>--qs-radius</code></td>
+                      <td class="default">0.375rem</td>
+                      <td>Border radius</td>
+                    </tr>
+                    <tr>
+                      <td><code>--qs-input-padding</code></td>
+                      <td class="default">0.5rem 0.75rem</td>
+                      <td>Input padding</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </section>
 
-                                        <label class="checkbox">
-                                            <input
-                                                type="checkbox"
-                                                id="ctrl-disabled"
-                                            />
-                                            Disabled
-                                        </label>
-
-                                        <label class="checkbox">
-                                            <input
-                                                type="checkbox"
-                                                id="ctrl-required"
-                                            />
-                                            Required
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
-                        </section>
-
-                        <!-- Props -->
-                        <section>
-                            <header>Props</header>
-                            <div class="section-content" style="padding: 0">
-                                <table>
-                                    <thead>
-                                        <tr>
-                                            <th>Attribute</th>
-                                            <th>Type</th>
-                                            <th>Default</th>
-                                            <th>Description</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td><code>placeholder</code></td>
-                                            <td class="type">string</td>
-                                            <td class="default">
-                                                "handle.bsky.social"
-                                            </td>
-                                            <td>Input placeholder text</td>
-                                        </tr>
-                                        <tr>
-                                            <td><code>debounce</code></td>
-                                            <td class="type">number</td>
-                                            <td class="default">200</td>
-                                            <td>
-                                                Debounce delay in milliseconds
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td><code>limit</code></td>
-                                            <td class="type">number</td>
-                                            <td class="default">5</td>
-                                            <td>
-                                                Maximum suggestions to display
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td><code>name</code></td>
-                                            <td class="type">string</td>
-                                            <td class="default">—</td>
-                                            <td>Form field name</td>
-                                        </tr>
-                                        <tr>
-                                            <td><code>value</code></td>
-                                            <td class="type">string</td>
-                                            <td class="default">""</td>
-                                            <td>Current input value</td>
-                                        </tr>
-                                        <tr>
-                                            <td><code>disabled</code></td>
-                                            <td class="type">boolean</td>
-                                            <td class="default">false</td>
-                                            <td>Disable the input</td>
-                                        </tr>
-                                        <tr>
-                                            <td><code>required</code></td>
-                                            <td class="type">boolean</td>
-                                            <td class="default">false</td>
-                                            <td>
-                                                Mark as required for form
-                                                validation
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </section>
-
-                        <!-- Events -->
-                        <section>
-                            <header>Events</header>
-                            <div class="section-content" style="padding: 0">
-                                <table>
-                                    <thead>
-                                        <tr>
-                                            <th>Event</th>
-                                            <th>Detail</th>
-                                            <th>Description</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td><code>input</code></td>
-                                            <td class="default">—</td>
-                                            <td>Fires when value changes</td>
-                                        </tr>
-                                        <tr>
-                                            <td><code>change</code></td>
-                                            <td class="default">—</td>
-                                            <td>
-                                                Fires when a selection is made
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td><code>qs-select</code></td>
-                                            <td class="type">{ actor }</td>
-                                            <td>
-                                                Fires with full actor data on
-                                                selection
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </section>
-
-                        <!-- Properties -->
-                        <section>
-                            <header>JavaScript Properties</header>
-                            <div class="section-content" style="padding: 0">
-                                <table>
-                                    <thead>
-                                        <tr>
-                                            <th>Property</th>
-                                            <th>Type</th>
-                                            <th>Description</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td><code>.value</code></td>
-                                            <td class="type">string</td>
-                                            <td>
-                                                Get/set the current handle value
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td><code>.actor</code></td>
-                                            <td class="type">object | null</td>
-                                            <td>
-                                                The full actor object from last
-                                                selection
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td><code>.form</code></td>
-                                            <td class="type">
-                                                HTMLFormElement
-                                            </td>
-                                            <td>Reference to parent form</td>
-                                        </tr>
-                                        <tr>
-                                            <td><code>.validity</code></td>
-                                            <td class="type">ValidityState</td>
-                                            <td>Form validation state</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </section>
-
-                        <!-- CSS Custom Properties -->
-                        <section>
-                            <header>CSS Custom Properties</header>
-                            <div class="section-content" style="padding: 0">
-                                <table>
-                                    <thead>
-                                        <tr>
-                                            <th>Property</th>
-                                            <th>Default</th>
-                                            <th>Description</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td><code>--qs-input-bg</code></td>
-                                            <td class="default">transparent</td>
-                                            <td>Input background color</td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <code>--qs-input-border</code>
-                                            </td>
-                                            <td class="default">#ccc</td>
-                                            <td>Input border color</td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <code
-                                                    >--qs-input-border-focus</code
-                                                >
-                                            </td>
-                                            <td class="default">#0085ff</td>
-                                            <td>Input border color on focus</td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <code>--qs-input-text</code>
-                                            </td>
-                                            <td class="default">inherit</td>
-                                            <td>Input text color</td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <code
-                                                    >--qs-input-placeholder</code
-                                                >
-                                            </td>
-                                            <td class="default">#999</td>
-                                            <td>Placeholder text color</td>
-                                        </tr>
-                                        <tr>
-                                            <td><code>--qs-menu-bg</code></td>
-                                            <td class="default">#fff</td>
-                                            <td>Dropdown menu background</td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <code>--qs-menu-border</code>
-                                            </td>
-                                            <td class="default">#ddd</td>
-                                            <td>Dropdown menu border</td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <code>--qs-item-hover</code>
-                                            </td>
-                                            <td class="default">#f3f4f6</td>
-                                            <td>
-                                                Item hover/active background
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <code>--qs-handle-color</code>
-                                            </td>
-                                            <td class="default">#111</td>
-                                            <td>Handle text color</td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <code>--qs-name-color</code>
-                                            </td>
-                                            <td class="default">#666</td>
-                                            <td>Display name text color</td>
-                                        </tr>
-                                        <tr>
-                                            <td><code>--qs-radius</code></td>
-                                            <td class="default">0.375rem</td>
-                                            <td>Border radius</td>
-                                        </tr>
-                                        <tr>
-                                            <td><code>--qs-input-padding</code></td>
-                                            <td class="default">0.5rem 0.75rem</td>
-                                            <td>Input padding</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </section>
-
-                        <!-- Stories -->
-                        <section>
-                            <header>Examples</header>
-                            <div class="section-content stories">
-                                <div class="story">
-                                    <h4>Form Integration</h4>
-                                    <div class="story-preview">
-                                        <form class="demo-form" id="demo-form">
-                                            <qs-actor-autocomplete
-                                                name="handle"
-                                                required
-                                                placeholder="Enter handle"
-                                            ></qs-actor-autocomplete>
-                                            <button type="submit">
-                                                Submit
-                                            </button>
-                                        </form>
-                                    </div>
-                                    <pre><span class="tag">&lt;form&gt;</span>
+            <!-- Stories -->
+            <section>
+              <header>Examples</header>
+              <div class="section-content stories">
+                <div class="story">
+                  <h4>Form Integration</h4>
+                  <div class="story-preview">
+                    <form class="demo-form" id="demo-form">
+                      <qs-actor-autocomplete
+                        name="handle"
+                        required
+                        placeholder="Enter handle"
+                      ></qs-actor-autocomplete>
+                      <button type="submit">Submit</button>
+                    </form>
+                  </div>
+                  <pre><span class="tag">&lt;form&gt;</span>
   <span class="tag">&lt;qs-actor-autocomplete</span>
     <span class="attr">name</span>=<span class="str">"handle"</span>
     <span class="attr">required</span>
   <span class="tag">&gt;&lt;/qs-actor-autocomplete&gt;</span>
   <span class="tag">&lt;button</span> <span class="attr">type</span>=<span class="str">"submit"</span><span class="tag">&gt;</span>Submit<span class="tag">&lt;/button&gt;</span>
 <span class="tag">&lt;/form&gt;</span></pre>
-                                    <div
-                                        id="form-output"
-                                        class="output"
-                                        hidden
-                                    ></div>
-                                </div>
+                  <div id="form-output" class="output" hidden></div>
+                </div>
 
-                                <div class="story">
-                                    <h4>Event Handling</h4>
-                                    <div class="story-preview">
-                                        <qs-actor-autocomplete
-                                            id="event-demo"
-                                        ></qs-actor-autocomplete>
-                                    </div>
-                                    <pre><span class="tag">&lt;qs-actor-autocomplete</span> <span class="attr">id</span>=<span class="str">"input"</span><span class="tag">&gt;&lt;/qs-actor-autocomplete&gt;</span>
+                <div class="story">
+                  <h4>Event Handling</h4>
+                  <div class="story-preview">
+                    <qs-actor-autocomplete
+                      id="event-demo"
+                    ></qs-actor-autocomplete>
+                  </div>
+                  <pre><span class="tag">&lt;qs-actor-autocomplete</span> <span class="attr">id</span>=<span class="str">"input"</span><span class="tag">&gt;&lt;/qs-actor-autocomplete&gt;</span>
 
 <span class="tag">&lt;script&gt;</span>
   input.<span class="fn">addEventListener</span>(<span class="str">'qs-select'</span>, (e) <span class="kw">=&gt;</span> {
     console.<span class="fn">log</span>(e.detail.actor)
   })
 <span class="tag">&lt;/script&gt;</span></pre>
-                                    <div id="event-output" class="output">
-                                        Select a handle to see actor data
-                                    </div>
-                                </div>
-
-                                <div class="story">
-                                    <h4>Disabled State</h4>
-                                    <div class="story-preview">
-                                        <qs-actor-autocomplete
-                                            disabled
-                                            value="disabled.bsky.social"
-                                        ></qs-actor-autocomplete>
-                                    </div>
-                                    <pre><span class="tag">&lt;qs-actor-autocomplete</span> <span class="attr">disabled</span> <span class="attr">value</span>=<span class="str">"disabled.bsky.social"</span><span class="tag">&gt;&lt;/qs-actor-autocomplete&gt;</span></pre>
-                                </div>
-                            </div>
-                        </section>
-                    </div>
+                  <div id="event-output" class="output">
+                    Select a handle to see actor data
+                  </div>
                 </div>
-            </main>
+
+                <div class="story">
+                  <h4>Disabled State</h4>
+                  <div class="story-preview">
+                    <qs-actor-autocomplete
+                      disabled
+                      value="disabled.bsky.social"
+                    ></qs-actor-autocomplete>
+                  </div>
+                  <pre><span class="tag">&lt;qs-actor-autocomplete</span> <span class="attr">disabled</span> <span class="attr">value</span>=<span class="str">"disabled.bsky.social"</span><span class="tag">&gt;&lt;/qs-actor-autocomplete&gt;</span></pre>
+                </div>
+              </div>
+            </section>
+          </div>
         </div>
+      </main>
+    </div>
 
-        <script type="module">
-            // Routing
-            function navigate() {
-                const hash = location.hash.slice(1) || "getting-started";
-                document
-                    .querySelectorAll(".page")
-                    .forEach((p) => (p.hidden = true));
-                document
-                    .querySelectorAll(".sidebar nav a")
-                    .forEach((a) => a.classList.remove("active"));
+    <script type="module">
+      // Routing
+      function navigate() {
+        const hash = location.hash.slice(1) || "getting-started";
+        document.querySelectorAll(".page").forEach((p) => (p.hidden = true));
+        document
+          .querySelectorAll(".sidebar nav a")
+          .forEach((a) => a.classList.remove("active"));
 
-                const page = document.getElementById("page-" + hash);
-                const link = document.querySelector(
-                    `.sidebar nav a[href="#${hash}"]`,
-                );
+        const page = document.getElementById("page-" + hash);
+        const link = document.querySelector(`.sidebar nav a[href="#${hash}"]`);
 
-                if (page) page.hidden = false;
-                if (link) link.classList.add("active");
-            }
+        if (page) page.hidden = false;
+        if (link) link.classList.add("active");
+      }
 
-            window.addEventListener("hashchange", navigate);
-            navigate();
+      window.addEventListener("hashchange", navigate);
+      navigate();
 
-            const playground = document.getElementById("playground");
-            const codeBlock = document.getElementById("playground-code");
+      const playground = document.getElementById("playground");
+      const codeBlock = document.getElementById("playground-code");
 
-            const controls = {
-                placeholder: document.getElementById("ctrl-placeholder"),
-                debounce: document.getElementById("ctrl-debounce"),
-                limit: document.getElementById("ctrl-limit"),
-                disabled: document.getElementById("ctrl-disabled"),
-                required: document.getElementById("ctrl-required"),
-            };
+      const controls = {
+        placeholder: document.getElementById("ctrl-placeholder"),
+        debounce: document.getElementById("ctrl-debounce"),
+        limit: document.getElementById("ctrl-limit"),
+        disabled: document.getElementById("ctrl-disabled"),
+        required: document.getElementById("ctrl-required"),
+      };
 
-            function updatePlayground() {
-                const placeholder = controls.placeholder.value;
-                const debounce = controls.debounce.value;
-                const limit = controls.limit.value;
-                const disabled = controls.disabled.checked;
-                const required = controls.required.checked;
+      function updatePlayground() {
+        const placeholder = controls.placeholder.value;
+        const debounce = controls.debounce.value;
+        const limit = controls.limit.value;
+        const disabled = controls.disabled.checked;
+        const required = controls.required.checked;
 
-                playground.setAttribute("placeholder", placeholder);
-                playground.setAttribute("debounce", debounce);
-                playground.setAttribute("limit", limit);
-                disabled
-                    ? playground.setAttribute("disabled", "")
-                    : playground.removeAttribute("disabled");
-                required
-                    ? playground.setAttribute("required", "")
-                    : playground.removeAttribute("required");
+        playground.setAttribute("placeholder", placeholder);
+        playground.setAttribute("debounce", debounce);
+        playground.setAttribute("limit", limit);
+        disabled
+          ? playground.setAttribute("disabled", "")
+          : playground.removeAttribute("disabled");
+        required
+          ? playground.setAttribute("required", "")
+          : playground.removeAttribute("required");
 
-                let attrs = [];
-                if (placeholder !== "handle.bsky.social")
-                    attrs.push(
-                        `<span class="attr">placeholder</span>=<span class="str">"${placeholder}"</span>`,
-                    );
-                if (debounce !== "200")
-                    attrs.push(
-                        `<span class="attr">debounce</span>=<span class="str">"${debounce}"</span>`,
-                    );
-                if (limit !== "5")
-                    attrs.push(
-                        `<span class="attr">limit</span>=<span class="str">"${limit}"</span>`,
-                    );
-                if (disabled) attrs.push(`<span class="attr">disabled</span>`);
-                if (required) attrs.push(`<span class="attr">required</span>`);
+        let attrs = [];
+        if (placeholder !== "handle.bsky.social")
+          attrs.push(
+            `<span class="attr">placeholder</span>=<span class="str">"${placeholder}"</span>`,
+          );
+        if (debounce !== "200")
+          attrs.push(
+            `<span class="attr">debounce</span>=<span class="str">"${debounce}"</span>`,
+          );
+        if (limit !== "5")
+          attrs.push(
+            `<span class="attr">limit</span>=<span class="str">"${limit}"</span>`,
+          );
+        if (disabled) attrs.push(`<span class="attr">disabled</span>`);
+        if (required) attrs.push(`<span class="attr">required</span>`);
 
-                const attrsStr = attrs.length
-                    ? "\n  " + attrs.join("\n  ") + "\n"
-                    : "";
-                codeBlock.innerHTML = `<span class="tag">&lt;qs-actor-autocomplete</span>${attrsStr}<span class="tag">&gt;&lt;/qs-actor-autocomplete&gt;</span>`;
-            }
+        const attrsStr = attrs.length ? "\n  " + attrs.join("\n  ") + "\n" : "";
+        codeBlock.innerHTML = `<span class="tag">&lt;qs-actor-autocomplete</span>${attrsStr}<span class="tag">&gt;&lt;/qs-actor-autocomplete&gt;</span>`;
+      }
 
-            Object.values(controls).forEach((ctrl) => {
-                ctrl.addEventListener("input", updatePlayground);
-                ctrl.addEventListener("change", updatePlayground);
-            });
+      Object.values(controls).forEach((ctrl) => {
+        ctrl.addEventListener("input", updatePlayground);
+        ctrl.addEventListener("change", updatePlayground);
+      });
 
-            updatePlayground();
+      updatePlayground();
 
-            document
-                .getElementById("demo-form")
-                .addEventListener("submit", (e) => {
-                    e.preventDefault();
-                    const formData = new FormData(e.target);
-                    const output = document.getElementById("form-output");
-                    output.hidden = false;
-                    output.textContent = `Submitted: ${formData.get("handle")}`;
-                });
+      document.getElementById("demo-form").addEventListener("submit", (e) => {
+        e.preventDefault();
+        const formData = new FormData(e.target);
+        const output = document.getElementById("form-output");
+        output.hidden = false;
+        output.textContent = `Submitted: ${formData.get("handle")}`;
+      });
 
-            document
-                .getElementById("event-demo")
-                .addEventListener("qs-select", (e) => {
-                    document.getElementById("event-output").textContent =
-                        JSON.stringify(e.detail.actor, null, 2);
-                });
-        </script>
-    </body>
+      document
+        .getElementById("event-demo")
+        .addEventListener("qs-select", (e) => {
+          document.getElementById("event-output").textContent = JSON.stringify(
+            e.detail.actor,
+            null,
+            2,
+          );
+        });
+    </script>
+  </body>
 </html>
