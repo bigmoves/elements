@@ -43,7 +43,7 @@ npm install quickslice-elements
 <script type="module" src="quickslice-elements/dist/elements.min.js"></script>
 
 <!-- From CDN -->
-<script type="module" src="https://cdn.jsdelivr.net/npm/quickslice-elements/dist/elements.min.js"></script>
+<script type="module" src="https://cdn.jsdelivr.net/npm/quickslice-elements@0.1.0/dist/elements.min.js"></script>
 ```
 
 ## Development
