@@ -25,35 +25,17 @@ Autocomplete input for searching Bluesky actors by handle.
 Inline badge showing star count for a Tangled repository.
 
 ```html
-<qs-tangled-stars handle="slices.network" repo="quickslice"></qs-tangled-stars>
+<qs-tangled-stars handle="slices.network" repo="quickslice" instance="https://your-quickslice-instance.com"></qs-tangled-stars>
 ```
 
-**Attributes:** `handle`, `repo`, `instance`
-
-## Installation
-
-```bash
-npm install quickslice-elements
-```
+**Attributes:** `handle`, `repo`, `instance` (required)
 
 ## Usage
 
 ```html
-<!-- From npm -->
-<script type="module" src="quickslice-elements/dist/elements.min.js"></script>
-
-<!-- From CDN -->
-<script type="module" src="https://cdn.jsdelivr.net/npm/quickslice-elements@0.1.0/dist/elements.min.js"></script>
-```
-
-## Development
-
-```bash
-npm install
-npm run dev      # Start dev server
-npm run build    # Build for production
+<script src="https://cdn.jsdelivr.net/gh/bigmoves/elements@v0.1.0/dist/elements.min.js"></script>
 ```
 
 ## License
 
-ISC
+Apache 2.0

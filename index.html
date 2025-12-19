@@ -525,11 +525,7 @@
             <section>
               <header>Installation</header>
               <div class="section-content">
-                <h4>CDN</h4>
                 <pre><span class="tag">&lt;script</span> <span class="attr">src</span>=<span class="str">"https://unpkg.com/@quickslice/elements"</span><span class="tag">&gt;&lt;/script&gt;</span></pre>
-
-                <h4>npm</h4>
-                <pre>npm install @quickslice/elements</pre>
               </div>
             </section>
 
@@ -974,11 +970,11 @@
                     <label>Repo</label>
                     <input type="text" id="stars-ctrl-repo" value="core" />
 
-                    <label>Instance</label>
+                    <label>Instance (required)</label>
                     <input
                       type="text"
                       id="stars-ctrl-instance"
-                      placeholder="(default)"
+                      placeholder="https://quickslice.example.com"
                     />
                   </div>
                 </div>
@@ -1014,8 +1010,8 @@
                     <tr>
                       <td><code>instance</code></td>
                       <td class="type">string</td>
-                      <td class="default">"https://quickslice-production-ddc3.up.railway.app"</td>
-                      <td>Custom quickslice instance URL</td>
+                      <td class="default"><em>required</em></td>
+                      <td>Quickslice instance URL</td>
                     </tr>
                   </tbody>
                 </table>
@@ -1048,7 +1044,7 @@
                     <tr>
                       <td><code>.instance</code></td>
                       <td class="type">string</td>
-                      <td>Get the instance URL (default or custom)</td>
+                      <td>Get the instance URL</td>
                     </tr>
                     <tr>
                       <td><code>.count</code></td>
