@@ -973,6 +973,13 @@
 
                     <label>Repo</label>
                     <input type="text" id="stars-ctrl-repo" value="core" />
+
+                    <label>Instance</label>
+                    <input
+                      type="text"
+                      id="stars-ctrl-instance"
+                      placeholder="(default)"
+                    />
                   </div>
                 </div>
               </div>
@@ -1004,6 +1011,12 @@
                       <td class="default">""</td>
                       <td>The repository name</td>
                     </tr>
+                    <tr>
+                      <td><code>instance</code></td>
+                      <td class="type">string</td>
+                      <td class="default">"https://quickslice-production-ddc3.up.railway.app"</td>
+                      <td>Custom quickslice instance URL</td>
+                    </tr>
                   </tbody>
                 </table>
               </div>
@@ -1031,6 +1044,11 @@
                       <td><code>.repo</code></td>
                       <td class="type">string</td>
                       <td>Get the repo attribute value</td>
+                    </tr>
+                    <tr>
+                      <td><code>.instance</code></td>
+                      <td class="type">string</td>
+                      <td>Get the instance URL (default or custom)</td>
                     </tr>
                     <tr>
                       <td><code>.count</code></td>
@@ -1259,18 +1277,32 @@
       const starsControls = {
         handle: document.getElementById("stars-ctrl-handle"),
         repo: document.getElementById("stars-ctrl-repo"),
+        instance: document.getElementById("stars-ctrl-instance"),
       };
 
       function updateStarsPlayground() {
         const handle = starsControls.handle.value;
         const repo = starsControls.repo.value;
+        const instance = starsControls.instance.value;
 
         starsPlayground.setAttribute("handle", handle);
         starsPlayground.setAttribute("repo", repo);
+        if (instance) {
+          starsPlayground.setAttribute("instance", instance);
+        } else {
+          starsPlayground.removeAttribute("instance");
+        }
+
+        let attrs = [
+          `<span class="attr">handle</span>=<span class="str">"${handle}"</span>`,
+          `<span class="attr">repo</span>=<span class="str">"${repo}"</span>`,
+        ];
+        if (instance) {
+          attrs.push(`<span class="attr">instance</span>=<span class="str">"${instance}"</span>`);
+        }
 
         starsCodeBlock.innerHTML = `<span class="tag">&lt;qs-tangled-stars</span>
-  <span class="attr">handle</span>=<span class="str">"${handle}"</span>
-  <span class="attr">repo</span>=<span class="str">"${repo}"</span>
+  ${attrs.join('\n  ')}
 <span class="tag">&gt;&lt;/qs-tangled-stars&gt;</span>`;
       }
 

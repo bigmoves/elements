@@ -1,5 +1,5 @@
 {
-  "name": "@quickslice/elements",
+  "name": "quickslice-elements",
   "version": "0.1.0",
   "type": "module",
   "main": "./dist/elements.min.js",
