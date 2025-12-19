@@ -508,6 +508,7 @@
           <div class="sidebar-group">
             <div class="sidebar-group-label">Components</div>
             <a href="#qs-actor-autocomplete">qs-actor-autocomplete</a>
+            <a href="#qs-tangled-stars">qs-tangled-stars</a>
           </div>
         </nav>
       </aside>
@@ -586,6 +587,14 @@
                         >
                       </td>
                       <td>AT Protocol actor/handle autocomplete input</td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <a href="#qs-tangled-stars"
+                          ><code>qs-tangled-stars</code></a
+                        >
+                      </td>
+                      <td>Inline badge showing Tangled repo star count</td>
                     </tr>
                   </tbody>
                 </table>
@@ -929,6 +938,225 @@
             </section>
           </div>
         </div>
+
+        <!-- qs-tangled-stars Component Page -->
+        <div class="page" id="page-qs-tangled-stars" hidden>
+          <div class="content-inner">
+            <h1>&lt;qs-tangled-stars&gt;</h1>
+            <p class="description">
+              Inline badge showing a Tangled repository's star count with the
+              dolly icon.
+            </p>
+
+            <!-- Playground -->
+            <section>
+              <header>Playground</header>
+              <div class="section-content">
+                <div class="playground">
+                  <div>
+                    <div class="preview">
+                      <qs-tangled-stars
+                        id="stars-playground"
+                        handle="tangled.org"
+                        repo="core"
+                      ></qs-tangled-stars>
+                    </div>
+                    <pre id="stars-playground-code"></pre>
+                  </div>
+                  <div class="controls">
+                    <label>Handle</label>
+                    <input
+                      type="text"
+                      id="stars-ctrl-handle"
+                      value="tangled.org"
+                    />
+
+                    <label>Repo</label>
+                    <input type="text" id="stars-ctrl-repo" value="core" />
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <!-- Props -->
+            <section>
+              <header>Props</header>
+              <div class="section-content" style="padding: 0">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Attribute</th>
+                      <th>Type</th>
+                      <th>Default</th>
+                      <th>Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><code>handle</code></td>
+                      <td class="type">string</td>
+                      <td class="default">""</td>
+                      <td>The repo owner's handle (e.g., "alice.bsky.social")</td>
+                    </tr>
+                    <tr>
+                      <td><code>repo</code></td>
+                      <td class="type">string</td>
+                      <td class="default">""</td>
+                      <td>The repository name</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </section>
+
+            <!-- Properties -->
+            <section>
+              <header>JavaScript Properties</header>
+              <div class="section-content" style="padding: 0">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Property</th>
+                      <th>Type</th>
+                      <th>Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><code>.handle</code></td>
+                      <td class="type">string</td>
+                      <td>Get the handle attribute value</td>
+                    </tr>
+                    <tr>
+                      <td><code>.repo</code></td>
+                      <td class="type">string</td>
+                      <td>Get the repo attribute value</td>
+                    </tr>
+                    <tr>
+                      <td><code>.count</code></td>
+                      <td class="type">number | null</td>
+                      <td>The fetched star count (null if loading/error)</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </section>
+
+            <!-- CSS Custom Properties -->
+            <section>
+              <header>CSS Custom Properties</header>
+              <div class="section-content" style="padding: 0">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Property</th>
+                      <th>Default</th>
+                      <th>Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><code>--qs-stars-label-bg</code></td>
+                      <td class="default">#e1e4e8</td>
+                      <td>Label section background</td>
+                    </tr>
+                    <tr>
+                      <td><code>--qs-stars-label-text</code></td>
+                      <td class="default">#24292f</td>
+                      <td>Label text and icon color</td>
+                    </tr>
+                    <tr>
+                      <td><code>--qs-stars-count-bg</code></td>
+                      <td class="default">#fff</td>
+                      <td>Count section background</td>
+                    </tr>
+                    <tr>
+                      <td><code>--qs-stars-count-text</code></td>
+                      <td class="default">#24292f</td>
+                      <td>Count text color</td>
+                    </tr>
+                    <tr>
+                      <td><code>--qs-stars-border</code></td>
+                      <td class="default">#d1d5da</td>
+                      <td>Border color</td>
+                    </tr>
+                    <tr>
+                      <td><code>--qs-stars-radius</code></td>
+                      <td class="default">0.375em</td>
+                      <td>Border radius</td>
+                    </tr>
+                    <tr>
+                      <td><code>--qs-stars-font-size</code></td>
+                      <td class="default">0.75em</td>
+                      <td>Font size</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </section>
+
+            <!-- Examples -->
+            <section>
+              <header>Examples</header>
+              <div class="section-content stories">
+                <div class="story">
+                  <h4>In a Header</h4>
+                  <div class="story-preview">
+                    <div style="display: flex; align-items: center; gap: 1rem;">
+                      <span style="font-size: 1.5rem; font-weight: 600; color: var(--text-primary);">quickslice</span>
+                      <qs-tangled-stars
+                        handle="slices.network"
+                        repo="quickslice"
+                      ></qs-tangled-stars>
+                    </div>
+                  </div>
+                  <pre><span class="tag">&lt;h1&gt;</span>quickslice <span class="tag">&lt;qs-tangled-stars</span> <span class="attr">handle</span>=<span class="str">"slices.network"</span> <span class="attr">repo</span>=<span class="str">"quickslice"</span><span class="tag">&gt;&lt;/qs-tangled-stars&gt;&lt;/h1&gt;</span></pre>
+                </div>
+
+                <div class="story">
+                  <h4>Custom Styling</h4>
+                  <div class="story-preview">
+                    <qs-tangled-stars
+                      handle="slices.network"
+                      repo="quickslice"
+                      style="--qs-stars-label-bg: var(--accent-cyan); --qs-stars-label-text: var(--bg-base); --qs-stars-border: var(--accent-cyan);"
+                    ></qs-tangled-stars>
+                  </div>
+                  <pre><span class="tag">&lt;qs-tangled-stars</span>
+  <span class="attr">handle</span>=<span class="str">"slices.network"</span>
+  <span class="attr">repo</span>=<span class="str">"quickslice"</span>
+  <span class="attr">style</span>=<span class="str">"--qs-stars-label-bg: #00ced1; --qs-stars-label-text: #000;"</span>
+<span class="tag">&gt;&lt;/qs-tangled-stars&gt;</span></pre>
+                </div>
+
+                <div class="story">
+                  <h4>Different Sizes</h4>
+                  <div class="story-preview" style="display: flex; align-items: center; gap: 1rem;">
+                    <qs-tangled-stars
+                      handle="slices.network"
+                      repo="quickslice"
+                      style="font-size: 0.75rem;"
+                    ></qs-tangled-stars>
+                    <qs-tangled-stars
+                      handle="slices.network"
+                      repo="quickslice"
+                      style="font-size: 1rem;"
+                    ></qs-tangled-stars>
+                    <qs-tangled-stars
+                      handle="slices.network"
+                      repo="quickslice"
+                      style="font-size: 1.5rem;"
+                    ></qs-tangled-stars>
+                  </div>
+                  <pre><span class="cmt">&lt;!-- Inherits font-size from parent --&gt;</span>
+<span class="tag">&lt;qs-tangled-stars</span> <span class="attr">style</span>=<span class="str">"font-size: 0.75rem"</span> ...<span class="tag">&gt;&lt;/qs-tangled-stars&gt;</span>
+<span class="tag">&lt;qs-tangled-stars</span> <span class="attr">style</span>=<span class="str">"font-size: 1rem"</span> ...<span class="tag">&gt;&lt;/qs-tangled-stars&gt;</span>
+<span class="tag">&lt;qs-tangled-stars</span> <span class="attr">style</span>=<span class="str">"font-size: 1.5rem"</span> ...<span class="tag">&gt;&lt;/qs-tangled-stars&gt;</span></pre>
+                </div>
+              </div>
+            </section>
+          </div>
+        </div>
       </main>
     </div>
 
@@ -1023,6 +1251,34 @@
             2,
           );
         });
+
+      // Stars playground
+      const starsPlayground = document.getElementById("stars-playground");
+      const starsCodeBlock = document.getElementById("stars-playground-code");
+
+      const starsControls = {
+        handle: document.getElementById("stars-ctrl-handle"),
+        repo: document.getElementById("stars-ctrl-repo"),
+      };
+
+      function updateStarsPlayground() {
+        const handle = starsControls.handle.value;
+        const repo = starsControls.repo.value;
+
+        starsPlayground.setAttribute("handle", handle);
+        starsPlayground.setAttribute("repo", repo);
+
+        starsCodeBlock.innerHTML = `<span class="tag">&lt;qs-tangled-stars</span>
+  <span class="attr">handle</span>=<span class="str">"${handle}"</span>
+  <span class="attr">repo</span>=<span class="str">"${repo}"</span>
+<span class="tag">&gt;&lt;/qs-tangled-stars&gt;</span>`;
+      }
+
+      Object.values(starsControls).forEach((ctrl) => {
+        ctrl.addEventListener("input", updateStarsPlayground);
+      });
+
+      updateStarsPlayground();
     </script>
   </body>
 </html>
