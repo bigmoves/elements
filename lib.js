@@ -545,6 +545,7 @@ const repoCardStyles = `
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
     font-size: 14px;
     line-height: 1.5;
+    white-space: normal;
   }
 
   @media (prefers-color-scheme: dark) {
