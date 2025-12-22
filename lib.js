@@ -529,6 +529,132 @@ const starsStyles = `
   }
 `;
 
+const repoCardStyles = `
+  :host {
+    --qs-card-bg: #fff;
+    --qs-card-border: #d1d5da;
+    --qs-card-text: #24292f;
+    --qs-card-muted: #656d76;
+    --qs-card-hover-border: #0969da;
+    --qs-topic-bg: #ddf4ff;
+    --qs-topic-text: #0969da;
+    --qs-card-radius: 0.5rem;
+
+    display: block;
+    max-width: 400px;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :host {
+      --qs-card-bg: #161b22;
+      --qs-card-border: #30363d;
+      --qs-card-text: #e6edf3;
+      --qs-card-muted: #8b949e;
+      --qs-card-hover-border: #58a6ff;
+      --qs-topic-bg: rgba(56,139,253,0.15);
+      --qs-topic-text: #58a6ff;
+    }
+  }
+
+  .card {
+    background: var(--qs-card-bg);
+    border: 1px solid var(--qs-card-border);
+    border-radius: var(--qs-card-radius);
+    padding: 1rem;
+    cursor: pointer;
+    transition: border-color 0.15s;
+  }
+
+  .card:hover {
+    border-color: var(--qs-card-hover-border);
+  }
+
+  .header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .icon {
+    width: 1.25rem;
+    height: 1.25rem;
+    flex-shrink: 0;
+    color: var(--qs-card-muted);
+  }
+
+  .icon svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+  .title {
+    flex: 1;
+    font-weight: 600;
+    color: var(--qs-card-text);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .stars {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    color: var(--qs-card-muted);
+    font-size: 0.75rem;
+    flex-shrink: 0;
+  }
+
+  .stars svg {
+    width: 1rem;
+    height: 1rem;
+  }
+
+  .description {
+    color: var(--qs-card-muted);
+    margin-bottom: 0.75rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .topics {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.375rem;
+  }
+
+  .topic {
+    background: var(--qs-topic-bg);
+    color: var(--qs-topic-text);
+    padding: 0.125rem 0.5rem;
+    border-radius: 2rem;
+    font-size: 0.75rem;
+    font-weight: 500;
+  }
+
+  .loading, .error {
+    color: var(--qs-card-muted);
+    padding: 1rem;
+    text-align: center;
+    background: var(--qs-card-bg);
+    border: 1px solid var(--qs-card-border);
+    border-radius: var(--qs-card-radius);
+  }
+
+  .error {
+    color: #cf222e;
+  }
+`;
+
+const starIcon = `<svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 .25a.75.75 0 0 1 .673.418l1.882 3.815 4.21.612a.75.75 0 0 1 .416 1.279l-3.046 2.97.719 4.192a.75.75 0 0 1-1.088.791L8 12.347l-3.766 1.98a.75.75 0 0 1-1.088-.79l.72-4.194L.818 6.374a.75.75 0 0 1 .416-1.28l4.21-.611L7.327.668A.75.75 0 0 1 8 .25Z"/></svg>`;
+
 class TangledStars extends HTMLElement {
   static get observedAttributes() {
     return ["handle", "repo", "instance"];
@@ -664,4 +790,172 @@ class TangledStars extends HTMLElement {
 
 customElements.define("qs-tangled-stars", TangledStars);
 
-export { BskyHandleInput, TangledStars };
+class TangledRepoCard extends HTMLElement {
+  static get observedAttributes() {
+    return ["handle", "repo", "instance"];
+  }
+
+  #data = null;
+  #loading = true;
+  #error = false;
+
+  constructor() {
+    super();
+    this.attachShadow({ mode: "open" });
+  }
+
+  connectedCallback() {
+    this.#render();
+    this.#fetchRepo();
+    this.addEventListener("click", this.#onClick);
+  }
+
+  disconnectedCallback() {
+    this.removeEventListener("click", this.#onClick);
+  }
+
+  attributeChangedCallback() {
+    if (this.shadowRoot.innerHTML) {
+      this.#fetchRepo();
+    }
+  }
+
+  get handle() {
+    return this.getAttribute("handle") || "";
+  }
+
+  get repo() {
+    return this.getAttribute("repo") || "";
+  }
+
+  get instance() {
+    return this.getAttribute("instance") || "";
+  }
+
+  #onClick = () => {
+    if (this.handle && this.repo) {
+      window.open(`https://tangled.sh/${this.handle}/${this.repo}`, "_blank");
+    }
+  };
+
+  #render() {
+    if (this.#loading) {
+      this.shadowRoot.innerHTML = `
+        <style>${repoCardStyles}</style>
+        <div class="loading">Loading...</div>
+      `;
+      return;
+    }
+
+    if (this.#error || !this.#data) {
+      this.shadowRoot.innerHTML = `
+        <style>${repoCardStyles}</style>
+        <div class="error">Could not load repo</div>
+      `;
+      return;
+    }
+
+    const topics = (this.#data.topics || []).slice(0, 5);
+
+    this.shadowRoot.innerHTML = `
+      <style>${repoCardStyles}</style>
+      <div class="card">
+        <div class="header">
+          <span class="icon">${dollyIcon}</span>
+          <span class="title">${this.#esc(this.handle)}/${this.#esc(this.#data.name)}</span>
+          <span class="stars">
+            ${starIcon}
+            ${this.#data.starCount ?? 0}
+          </span>
+        </div>
+        ${this.#data.description ? `<div class="description">${this.#esc(this.#data.description)}</div>` : ""}
+        ${topics.length > 0 ? `
+          <div class="topics">
+            ${topics.map(t => `<span class="topic">${this.#esc(t)}</span>`).join("")}
+          </div>
+        ` : ""}
+      </div>
+    `;
+  }
+
+  async #fetchRepo() {
+    const handle = this.handle;
+    const repo = this.repo;
+    const instance = this.instance;
+
+    if (!handle || !repo || !instance) {
+      this.#loading = false;
+      this.#error = true;
+      this.#render();
+      return;
+    }
+
+    this.#loading = true;
+    this.#error = false;
+    this.#render();
+
+    try {
+      const query = `
+        query GetRepo($handle: String!, $name: String!) {
+          shTangledRepo(first: 1, where: { actorHandle: { eq: $handle }, name: { eq: $name } }) {
+            edges {
+              node {
+                name
+                description
+                topics
+                shTangledFeedStarViaSubject {
+                  totalCount
+                }
+              }
+            }
+          }
+        }
+      `;
+
+      const res = await fetch(`${instance}/graphql`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          query,
+          variables: { handle, name: repo },
+        }),
+      });
+
+      if (!res.ok) throw new Error("Failed to fetch");
+
+      const json = await res.json();
+      const edges = json.data?.shTangledRepo?.edges || [];
+
+      if (edges.length > 0) {
+        const node = edges[0].node;
+        this.#data = {
+          name: node.name,
+          description: node.description,
+          topics: node.topics || [],
+          starCount: node.shTangledFeedStarViaSubject?.totalCount ?? 0,
+        };
+      } else {
+        this.#error = true;
+      }
+
+      this.#loading = false;
+    } catch (err) {
+      console.error("Failed to fetch Tangled repo:", err);
+      this.#loading = false;
+      this.#error = true;
+      this.#data = null;
+    }
+
+    this.#render();
+  }
+
+  #esc(str) {
+    const div = document.createElement("div");
+    div.textContent = str;
+    return div.innerHTML;
+  }
+}
+
+customElements.define("qs-tangled-repo-card", TangledRepoCard);
+
+export { BskyHandleInput, TangledStars, TangledRepoCard };
